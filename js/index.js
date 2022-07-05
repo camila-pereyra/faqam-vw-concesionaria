@@ -108,7 +108,7 @@ function calcularPrecioDeVenta(cuotas){
 function menu(arrAutos, arrAutosComprados){
     let opcion=-1;
     do{
-        opcion=parseInt(prompt("MENU\n1-Ver autos disponibles\n2-Buscar auto por modelo\n3-Agregar un auto al carrito de compras\n4-Ver carrito\n0-Salir\n\nElija una opcion: "));
+        opcion=parseInt(prompt("MENU\n1-Ver autos disponibles\n2-Buscar auto por modelo\n3-Agregar un auto al carrito de compras\n4-Ver carrito\n5-Modo oscuro del footer\n0-Salir\n\nElija una opcion: "));
         switch(opcion){
             case 0: alert("Usted ha salido! Hasta pronto!"); 
             break;
@@ -148,12 +148,23 @@ function menu(arrAutos, arrAutosComprados){
                 verAutosDatosCompletos(arrAutosComprados);
             }
             break;
+            case 5: 
+            //DOM
+            alert("Usted va a ver el footer en modo oscuro");
+            let footer=document.getElementById("footer");
+            let footerViculo=document.querySelectorAll(".footerVinculo");
+            for(const vinc of footerViculo){
+                vinc.classList.add("footerVinculoModoOscuro");
+            }
+            footer.classList.add("modoOscuro");
+            document.getElementById("logoFooter").src="image/logo-blanco.png"; //cambiar la img por la del logo blanco
+            opcion=0;
+            break;
             default: alert("No es una opcion valida.");
             break;   
         }  
     }while (opcion!=0);
 }
-
 
 /* ************************************************************************************************************************** */
 //Creo los objetos del tipo Auto
@@ -186,3 +197,4 @@ const autosComprados=[];
 
 //Bucle
 menu(autos, autosComprados);
+
