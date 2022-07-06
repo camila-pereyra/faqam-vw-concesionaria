@@ -92,7 +92,7 @@ header #logo{
     transition: all 0.7s;
 }
 /*ICONO CARRITO*/
-main #carrito{
+/* main #carrito{
     position: fixed;
     top: 89%;
     right: 12px;
@@ -105,7 +105,22 @@ main #carrito{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
+.carrito{
+        position: fixed;
+        top: 89%;
+        right: 12px;
+        z-index: 11;
+        width: 70px;
+        height: 70px;
+        box-shadow: 5px 5px 10px black;
+        border-radius: 100px;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 /*================================================ FOOTER ================================================*/
 footer div{
     width: 80%;
@@ -138,3 +153,19 @@ footer a{
 .footerVinculoModoOscuro{
     color: white;
 }
+.btnCarrousel{
+    position: absolute;
+    z-index: 3;
+    top: 90%;
+    left: 43vw;
+    text-decoration: none;
+    width: 200px;
+    padding: 5px;
+    border: solid 3px rgb(245, 245, 33);
+    background-color: rgb(245, 245, 33);
+    color: black;
+    font-size: 30px;
+    text-align: center;
+
+}
+

@@ -198,3 +198,12 @@ const autosComprados=[];
 //Bucle
 menu(autos, autosComprados);
 
+//Icono del carrito creado desde el DOM 
+let divCarrito=document.getElementById("carrito");
+let carritoVinculo= document.createElement("a");
+let imgCarrito= document.createElement('img');
+imgCarrito.src="./image/carrito5.png";
+carritoVinculo.href="#";
+carritoVinculo.appendChild(imgCarrito);
+divCarrito.append(carritoVinculo);
+carritoVinculo.classList.add("carrito");
