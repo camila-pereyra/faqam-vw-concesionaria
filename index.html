@@ -11,20 +11,27 @@
     <!--BS CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--BS ICONS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <!--FONTAWESOME-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--FONTS-->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Exo:wght@100&display=swap" rel="stylesheet">
     <!--FAVICON-->
     <link rel="shortcut icon" href="image/FAQAMlogo-removebgpreview.png" type="image/x-icon">
 </head>
 
 <body>
-    <header class="w-100 d-flex justify-content-between justify-content-lg-end  align-items-start
-    align-items-lg-center py-2 border-bottom border-dark">
+    <!--HEADER-->
+    <header
+        class="w-100 d-flex justify-content-between align-items-start align-items-lg-center p-2 border-bottom border-dark headerPositionFixed">
+        <!--logo-->
+        <a class="d-none d-lg-block" href="index.html"><img id="logo" src="image/FAQAMlogo-removebgpreview.png"
+                alt="logo"></a>
+        <!--nav-->
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -35,15 +42,22 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
-                        <a class="nav-link" href="#">Catalogo</a>
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="pages/catalogo.html">Catalogo</a>
+                        <a class="nav-link" href="pages/contacto.html">Contacto</a>
                     </div>
                 </div>
             </div>
         </nav>
-        <!--LOGO-->
-        <a href="index.html"><img id="logo" src="image/FAQAMlogo-removebgpreview.png" alt="logo"></a>
+        <!--carrito y user-->
+        <div>
+            <a class="me-2" href=""><img src="image/carritp-compras.png" alt=""></a>
+
+            <a class="me-2" href=""><img src="image/user.png" alt=""></a>
+
+        </div>
     </header>
+
+    <!--MAIN-->
     <main id="main">
         <!--HERO-->
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -74,160 +88,133 @@
             </button>
         </div>
 
-        <!--SECTION CARDS AUTOS-->
-        <section class="container text-center pt-3 pb-3 ">
-            <h3 class="pt-2 ">Encontra tu proximo <strong> Volkswagen</strong></h3>
-            <div id="containerCards" class="d-flex justify-content-around align-items-center flex-wrap">
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/bora.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Bora</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
+        <!--SECTION: MAS INFO-->
+        <section class="py-3">
+            <h2 class="text-center">En <strong>FAQAM</strong> hay un Volkswagen para vos</h2>
+            <div class="container py-2">
+                <div class="row justify-content-lg-center align-items-center">
+                    <div class="col-lg-10 mb-4 ">
+                        <img class="d-block w-100 " src="image/autos/amarokv6.png" alt="">
+                        <a href="">Descubrí mas</a>
                     </div>
                 </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/fox.jpg" alt="">
+                <div class="row justify-content-lg-center align-items-center">
+                    <div class="col-lg-5  mb-4">
+                        <img class="d-block w-100" src="image/autos/taos2.jpg" alt="">
+                        <a href="">Descubrí mas</a>
                     </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Fox</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
+
+                    <div class="col-lg-5  mb-4">
+                        <img class="d-block w-100" src="image/autos/virtus2.jpg" alt="">
+                        <a href="">Descubrí mas</a>
                     </div>
                 </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/gol.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Gol</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/golf.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Golf</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/passat.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Passat</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/polo.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Polo</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/taos.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Taos</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/tiguan.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Tiguan</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/up.jpeg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Up</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/vento.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Vento</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--Card-->
-                <div class="cardAuto">
-                    <div class="cardAuto-img">
-                        <img src="image/autos/virtus.jpg" alt="">
-                    </div>
-                    <div class="cardAuto-bodybtn">
-                        <div class="cardAuto-body">
-                            <p>Vw Virtus</p>
-                            <p>Precio: $</p>
-                        </div>
-                        <a class="cardAuto-btn" href="">Agregar al carrito</a>
-                    </div>
-                </div>
-                <!--CARRITO-->
-                <div id="carrito">
-                    <!--AGREGADO EN EL DOM CON JS-->
-                </div>
+            </div>
         </section>
 
+        <!--DIV: CATALOGO-->
+        <div class="container-fluid text-center mb-5">
+            <a id="btnCatalogo" href="pages/catalogo.html">Ir al catalogo</a>
+
+        </div>
+
+
+        <!--SECTION: OPINIONES-->
+        <section class="bg-success py-3">
+            <h3 class="text-center text-white ">Que opinan nuestros clientes</h3>
+            <div class="container py-2">
+                <!--  -->
+                <div class="row justify-content-sm-around justify-content-lg-around ">
+                    <div class="col-sm-5 col-lg-3 ">
+                        <div class="card border bg-white m-2">
+                            <div class="card-body text-center">
+                                <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/11.jpg"
+                                    alt="">
+                                <h4 class="card-tittle">Juan Perez</h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
+                                    neque nihil, quaerat nostrum perferendis sint!</p>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-lg-3 ">
+                        <div class="card border bg-white m-2">
+                            <div class="card-body text-center ">
+                                <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/72.jpg"
+                                    alt="">
+                                <h4 class="card-tittle">Facundo Quiroga</h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error,
+                                    ipsam?</p>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-lg-3">
+                        <div class="card border bg-white m-2">
+                            <div class="card-body text-center ">
+                                <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/31.jpg"
+                                    alt="">
+                                <h4 class="card-tittle">Roberto Sanchez</h4>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
+                                    officiis ratione necessitatibus eos et sed architecto explicabo vero quod adipisci.
+                                </p>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-lg-3">
+                        <div class="card border bg-white m-2">
+                            <div class="card-body text-center">
+                                <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/28.jpg"
+                                    alt="">
+                                <h4 class="card-tittle">Pablo Garcia</h4>
+                                <p class="card-text">Lorem ipsum dolor consectetur adipisicing elit. Voluptas
+                                    neque nihil, quaerat nostrum perferendis sint!</p>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                                <i class="bi bi-star-fill mx-1"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--ICONOS REDES SOCIALES-->
+        <div id="iconWtsp">
+            <a href=""><i class="fab fa-whatsapp"></i></a>
+
+        </div>
+        <div id="iconIg">
+            <a href=""><i class="fab fa-instagram"></i></a>
+
+        </div>
+        <div id="iconFace">
+            <a href=""><i class="fab fa-facebook "></i></a>
+        </div>
+
+
+
     </main>
+
+    <!--FOOTER-->
     <footer id="footer" class="w-100 d-lg-flex text-center border-top py-3">
         <div id="footerDivLogo" class="d-flex justify-content-center align-items-center">
             <img id="logoFooter" src="image/FAQAMlogo-removebgpreview.png" alt="logo">
@@ -240,24 +227,18 @@
         <div id="footerDivNav" class="d-flex justify-content-center align-items-center">
             <ul class="d-flex flex-column justify-content-center align-items-center">
                 <strong class="subrayar">Navegación</strong>
-                <li><a class="footerVinculo" href="">Inicio</a> </li>
-                <li><a class="footerVinculo" href="">Catalogo</a> </li>
-                <li><a class="footerVinculo" href="">Contacto</a> </li>
+                <li><a class="footerVinculo" href="index.html">Inicio</a> </li>
+                <li><a class="footerVinculo" href="pages/catalogo.html">Catalogo</a> </li>
+                <li><a class="footerVinculo" href="pages/contacto.html">Contacto</a> </li>
             </ul>
         </div>
-        <!-- A AGREGAR MAS ADELANTE COMO ICONOS AL COSTADO
-            <h5>Redes Sociales</h5>
-            <a href=""><i class="fab fa-whatsapp ms-2 me-2 styleIcono" id="wtsp"></i></a>
-            <a href=""><i class="fab fa-facebook me-2 ms-2 styleIcono" id="face"></i></a>
-            <a href=""><i class="fab fa-instagram me-2 ms-2 styleIcono" id="ig"></i></a>
-         -->
     </footer>
+    <!--JS-->
     <script src="js/index.js"></script>
     <!--BS JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>

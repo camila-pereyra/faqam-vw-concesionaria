@@ -1,4 +1,4 @@
-//CLASE AUTO
+/* //CLASE AUTO
 class Auto{
     //constructor
     constructor(id, marca, modelo, anio, precioLista, km, precioVenta, cdo, financiacion, cuotas){
@@ -33,9 +33,9 @@ class Auto{
     verAutoDatosCompletos(){
         alert("AUTO ID: "+this.id+"\nModelo: "+this.modelo+"\nAnio: "+this.anio+"\nPrecio Lista: $"+this.precioLista+"\nKM: "+this.km+"\nContado: "+this.cdo+"\nFinanciacion: "+this.financiacion+"\nCuotas: "+this.cuotas+"\n\nPRECIO FINAL s/financiacion: $"+this.precioVenta);
     }
-}
+} */
 
-//FUNCIONES 
+/* //FUNCIONES 
 //Funciones para mostrar (de manera completa o limitada) el array de Autos
 function verAutosDatosPrimarios(arrAutos){
     for (const auto of arrAutos) {
@@ -168,7 +168,7 @@ function menu(arrAutos, arrAutosComprados){
 
 /* ************************************************************************************************************************** */
 //Creo los objetos del tipo Auto
-const auto1=new Auto(1,"VW","TAOS",2010,1500000,60000,0,false,false,0);
+/* const auto1=new Auto(1,"VW","TAOS",2010,1500000,60000,0,false,false,0);
 const auto2=new Auto(2,"VW","BORA",2015,1800000,30000,0,false,false,0);
 const auto3=new Auto(3,"VW","UP",2020,2000000,15000,0,false,false,0);
 const auto4=new Auto(4,"VW","FOX",2013,800000,65000,0,false,false,0);
@@ -206,4 +206,4 @@ imgCarrito.src="./image/carrito5.png";
 carritoVinculo.href="#";
 carritoVinculo.appendChild(imgCarrito);
 divCarrito.append(carritoVinculo);
-carritoVinculo.classList.add("carrito");
+carritoVinculo.classList.add("carrito"); */
