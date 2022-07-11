@@ -103,7 +103,7 @@ header #logo{
 .cardAuto .cardAuto-img img{
     width: 100%;
 }
-.cardAuto .cardAuto-bodybtn{
+.cardAuto .cardAuto-content{
     width: 100%;
     padding: 0 30px 15px 30px;
     margin-bottom: 5px;
@@ -151,6 +151,31 @@ header #logo{
     transform: skew(45deg) scale(2,1);
     transition: all 0.7s;
 }
+
+/*SECTION CARRITO*/
+#carrito{
+    font-size: 0.8rem;
+}
+#carrito #carrito-title-col{
+    width: 100%;
+    margin: auto;
+    padding: 5px 0 5px 0;
+    font-weight: bold;
+    border-top: solid black 3px;    
+    border-bottom: solid black 3px;    
+}
+#carrito-title-col div{
+    margin: 0;
+    padding: 0;
+}
+#carrito p{
+    padding: 0;
+    margin:0;
+}
+#carrito .col-img img{
+    width: 50%;
+}
+
 /*ICONOS REDES SOCIALES*/
 #iconWtsp{
     width: 50px;
@@ -223,37 +248,10 @@ footer #footerDivLogo img{
 footer #footerDivNav ul{
     list-style: none;
 }
-.subrayar{
-    text-decoration: underline;
-}
-footer a{
+
+footer #footerDivNav a{
     text-decoration: none;
     color: black;
-
-}
-
-/*DOM (aplicado al footer)*/
-.modoOscuro{
-    background-color: black;
-    color: white;
-}
-.footerVinculoModoOscuro{
-    color: white;
-}
-.btnCarrousel{
-    position: absolute;
-    z-index: 3;
-    top: 90%;
-    left: 43vw;
-    text-decoration: none;
-    width: 200px;
-    padding: 5px;
-    border: solid 3px rgb(245, 245, 33);
-    background-color: rgb(245, 245, 33);
-    color: black;
-    font-size: 30px;
-    text-align: center;
-
 }
 
 /*EVENTOS*/
