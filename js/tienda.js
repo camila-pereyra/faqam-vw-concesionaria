@@ -8,6 +8,7 @@ class Auto{
         this.img=img;      
     }
 }
+
 //CLASE ITEM CARRITO
 class ItemCarrito{
     constructor(nombre, modelo,km, precio, cantidad, precioTotal, img){
@@ -60,8 +61,12 @@ baseDeDatos.push(auto10);
 baseDeDatos.push(auto11);
 baseDeDatos.push(auto12);
 
+//INICIO - Lo primero que hago es crear las card Auto y cargar los items carrito desde el LocalStorage
+renderizarProductos();
+cargarDesdeLocalStorage();
+
 //FUNCIONES
-//Funcion que crea las card Auto de acuerdo al array baseDeDatos. 
+//DOM -Funcion que crea las card Auto de acuerdo al array baseDeDatos. 
 function renderizarProductos() {
     baseDeDatos.forEach ((info) => {
         // Estructura Gral
@@ -107,43 +112,7 @@ function renderizarProductos() {
     })   
 };
 
-renderizarProductos();
-
-//Funcion que busca en un array el itemNombre y en caso de encontrarlo
-//lo retorna. Si no lo encuentra, retorna undefined
-function buscarItem(itemNombre,arr){
-    const itemBuscado=arr.find((el)=>el.nombre===itemNombre);   
-    return itemBuscado;
-}
-
-//Funcion de respuesta al evento "click" en cualquiera de los botones "agregar al carrito"
-function respuestaBtnAgregarCarrito(event){
-    event.preventDefault(); //para que no se recargue la pagina al clickear en el vinculo
-    const botonClickeado= event.target; //con este capturo cual es el boton que estan clickeando
-    const cardElegida = botonClickeado.closest(".cardAuto");  //con este capturo cual es el elemento mas cercano con esa clase (es decir toda la card)
-    //Voy a desglozar la tarjeta
-    const itemNombre=cardElegida.querySelector(".cardAuto-tittle").innerText;
-    const itemPrecio=cardElegida.querySelector(".cardAuto-precio").innerText;
-    const itemPrecioInt=parseInt(itemPrecio.replace("$",""));
-    const itemModelo=cardElegida.querySelector(".cardAuto-modelo").innerText;
-    const itemKm=cardElegida.querySelector(".cardAuto-km").innerText;
-    const itemImage=cardElegida.querySelector(".cardAuto-img").src;
-    const itemBuscado=buscarItem(itemNombre,carrito);
-    //si el item no esta en el carrito, lo agrego
-    if(itemBuscado==undefined){
-        const item=new ItemCarrito(itemNombre,itemModelo,itemKm,itemPrecioInt,1,itemPrecioInt,itemImage);
-        carrito.push(item);
-    }
-    //si el item esta en el carrito, le modifico la cantidad y el precioTotal del ItemCarrito
-    else{
-        let cantidadNueva=itemBuscado.cantidad+1;
-        itemBuscado.setCantidad(cantidadNueva);
-        itemBuscado.setPrecioTotal(itemBuscado.precio*cantidadNueva);
-    }
-    renderizarCarrito();
-}
-
-//Funcion que crea los items del carrito de acuerdo  al array carrito. 
+//DOM - Funcion que crea los items del carrito de acuerdo  al array carrito. 
 function renderizarCarrito(){
     // Vaciamos todo el html
     DOMCarrito.innerHTML = "";
@@ -200,9 +169,36 @@ function renderizarCarrito(){
        miNodo.appendChild(containerBtnEliminar);
        DOMCarrito.appendChild(miNodo);
     });
+    guardarEnLocalStorage(carrito);
     let sumaTotal=document.getElementById("sumaCompra");
     sumaTotal.innerText="TOTAL: $"+calcularTotal();
-    
+}
+
+//Funcion de respuesta al evento "click" en cualquiera de los botones "agregar al carrito"
+function respuestaBtnAgregarCarrito(event){
+    event.preventDefault(); //para que no se recargue la pagina al clickear en el vinculo
+    const botonClickeado= event.target; //con este capturo cual es el boton que estan clickeando
+    const cardElegida = botonClickeado.closest(".cardAuto");  //con este capturo cual es el elemento mas cercano con esa clase (es decir toda la card)
+    //Voy a desglozar la tarjeta
+    const itemNombre=cardElegida.querySelector(".cardAuto-tittle").innerText;
+    const itemPrecio=cardElegida.querySelector(".cardAuto-precio").innerText;
+    const itemPrecioInt=parseInt(itemPrecio.replace("$",""));
+    const itemModelo=cardElegida.querySelector(".cardAuto-modelo").innerText;
+    const itemKm=cardElegida.querySelector(".cardAuto-km").innerText;
+    const itemImage=cardElegida.querySelector(".cardAuto-img").src;
+    const itemAgregar=carrito.find(el=>el.nombre==itemNombre);
+    //si el item no esta en el carrito, lo agrego
+    if(itemAgregar==undefined){
+        const item=new ItemCarrito(itemNombre,itemModelo,itemKm,itemPrecioInt,1,itemPrecioInt,itemImage);
+        carrito.push(item);
+    }
+    //si el item esta en el carrito, le modifico la cantidad y el precioTotal del ItemCarrito
+    else{
+        let cantidadNueva=itemAgregar.cantidad+1;
+        itemAgregar.setCantidad(cantidadNueva);
+        itemAgregar.setPrecioTotal(itemAgregar.precio*cantidadNueva);
+    }
+    renderizarCarrito();
 }
 
 //Funcion de respuesta al evento "click" en cualquiera de los botones "x" del carrito. Elimina del carrito el item deseado. 
@@ -211,7 +207,6 @@ function respuestaBtnEliminarItem(event){
     const itemElegido = botonClickeado.closest(".itemCarrito");
     let itemElegidoNombre=(itemElegido.querySelector(".itemCarritoNombre")).innerText;
     const elementoEliminar=carrito.find((el)=>el.nombre===itemElegidoNombre);
-    console.log(elementoEliminar);
     let posicion=carrito.indexOf(elementoEliminar);
     carrito.splice(posicion,1);
     renderizarCarrito();
@@ -219,10 +214,14 @@ function respuestaBtnEliminarItem(event){
 
 //Funcion de respuesta al evento "click" en el boton vaciar carrito. Elimina todos elementos del carrito.
 function vaciarCarrito(){
-    while(carrito.length!=0){
-        carrito.pop();
+    if(carrito.length!=0){
+        while(carrito.length!=0){
+            carrito.pop();
+        }
+        renderizarCarrito(); 
+    }else{
+        alert("Aun no ha agregado nada al carrito!");
     }
-    renderizarCarrito();
 }
 
 //Funcion que calcula la suma total de todos elementos del carrito.
@@ -265,6 +264,24 @@ btnVaciarCarrito.addEventListener("click",vaciarCarrito);
 //BOTON CONFIRMAR COMPRA
 let btnConfirmarCompra=document.getElementById("btnConfirmarCompra");
 btnConfirmarCompra.addEventListener("click",confirmarCompra);
+
+//LOCAL STORAGE
+//Funcion que carga los items carrito desde el localStorage
+function cargarDesdeLocalStorage(){
+    for(let i=0; i<localStorage.length;i++){
+        let itemCarrito=JSON.parse(localStorage.getItem("item"+i));
+        carrito.push(itemCarrito);
+    } 
+    renderizarCarrito(); 
+}
+//Funcion que guarda los items carrito en el localStorage
+function guardarEnLocalStorage(arr){
+    localStorage.clear(); //lo limpio para que no se acumulen los anteriores elementos del carrito y cada vez que hace cambios se guarde solo ese array
+    for(let i=0; i<arr.length;i++){
+        let itemCarrito=JSON.stringify(arr[i]);//JSON.stringify lo que hace es que convierte al objeto en un archivo JSON que puede ser reconocido por el LocalStorage
+        localStorage.setItem("item"+i,itemCarrito);
+    }  
+}
 
 
 
