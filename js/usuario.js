@@ -8,8 +8,8 @@ class Usuario{
     }
 }
 
+//Inicio el array vacio o bien con lo que hay en el Local Storage
 const lstUsuarios= (JSON.parse(localStorage.getItem("lstUsuario")) || []);
-
 
 //REGISTRAR USUARIO
 function registarUsuario(e){
@@ -27,7 +27,8 @@ function registarUsuario(e){
         if(buscarCorreo(correo, lstUsuarios)==-1){
             const usuarioNuevo=new Usuario(lstUsuarios.length+1,nombre,apellido,correo,contraseña);
             lstUsuarios.push(usuarioNuevo);
-            localStorage.setItem("lstUsuario",JSON.stringify(lstUsuarios));            nodoMsj.innerText="Usuario generado con exito"
+            localStorage.setItem("lstUsuario",JSON.stringify(lstUsuarios));
+            nodoMsj.innerText="Usuario generado con exito"
         }
         else{
             nodoMsj.innerText="El email ingresado ya tiene una cuenta asociada"
@@ -49,7 +50,7 @@ function buscarCorreo(correoUsuario, listaUsuarios){
    } 
     return posEncontrado;
 }
-
+//INICIAR SESION 
 function iniciarSesion(e){
     e.preventDefault();
     let correo=document.getElementById("correo").value;
@@ -65,7 +66,7 @@ function iniciarSesion(e){
            nodoMsj.innerText="El email ingresado no posee una cuenta asociada"
         }else{
             if (lstUsuarios[posCorreo].contraseña==contraseña){
-                nodoMsj.innerText="Inicio de sesion exito";
+                nodoMsj.innerText="Inicio de sesion exitoso";
                 sessionStorage.setItem("usuario",correo);
                 sessionStorage.setItem("contraseña",contraseña);
             }else{
@@ -77,7 +78,7 @@ function iniciarSesion(e){
     }
     
 }
-//evento
+//EVENTOS
 let btnCrearUsuario=document.getElementById("btnCrearUsuario");
 btnCrearUsuario.addEventListener("click",registarUsuario);
 let btnIniciarSesion=document.getElementById("btnIniciarUsuario");
