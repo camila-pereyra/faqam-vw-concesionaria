@@ -31,7 +31,7 @@ class ItemCarrito{
 //VARIABLES
 const baseDeDatos=[]; 
 const DOMProductos=document.getElementById("containerCards");
-const carrito=[]
+const carrito=JSON.parse(localStorage.getItem("carrito"))|| [];
 const DOMCarrito=document.getElementById("items");
 
 //Creo los objetos del tipo Auto
@@ -61,10 +61,9 @@ baseDeDatos.push(auto10);
 baseDeDatos.push(auto11);
 baseDeDatos.push(auto12);
 
-//INICIO - Lo primero que hago es crear las card Auto y cargar los items carrito desde el LocalStorage
+//INICIO - Lo primero que hago es crear las card Auto y el carrito (en caso de que el carrito este cargado desde LocalStorage)
 renderizarProductos();
-cargarDesdeLocalStorage();
-
+renderizarCarrito();
 //FUNCIONES
 //DOM -Funcion que crea las card Auto de acuerdo al array baseDeDatos. 
 function renderizarProductos() {
@@ -169,7 +168,7 @@ function renderizarCarrito(){
        miNodo.appendChild(containerBtnEliminar);
        DOMCarrito.appendChild(miNodo);
     });
-    guardarEnLocalStorage(carrito);
+    localStorage.setItem("carrito",JSON.stringify(carrito));  
     let sumaTotal=document.getElementById("sumaCompra");
     sumaTotal.innerText="TOTAL: $"+calcularTotal();
 }
@@ -264,25 +263,6 @@ btnVaciarCarrito.addEventListener("click",vaciarCarrito);
 //BOTON CONFIRMAR COMPRA
 let btnConfirmarCompra=document.getElementById("btnConfirmarCompra");
 btnConfirmarCompra.addEventListener("click",confirmarCompra);
-
-//LOCAL STORAGE
-//Funcion que carga los items carrito desde el localStorage
-function cargarDesdeLocalStorage(){
-    for(let i=0; i<localStorage.length;i++){
-        let itemCarrito=JSON.parse(localStorage.getItem("item"+i));
-        carrito.push(itemCarrito);
-    } 
-    renderizarCarrito(); 
-}
-//Funcion que guarda los items carrito en el localStorage
-function guardarEnLocalStorage(arr){
-    localStorage.clear(); //lo limpio para que no se acumulen los anteriores elementos del carrito y cada vez que hace cambios se guarde solo ese array
-    for(let i=0; i<arr.length;i++){
-        let itemCarrito=JSON.stringify(arr[i]);//JSON.stringify lo que hace es que convierte al objeto en un archivo JSON que puede ser reconocido por el LocalStorage
-        localStorage.setItem("item"+i,itemCarrito);
-    }  
-}
-
 
 
 

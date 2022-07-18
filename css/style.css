@@ -65,7 +65,15 @@ header #logo{
     opacity: 1;
     transition: all 1s;
 }
-
+/*USUARIO*/
+.msjUsuario{
+    color: red;
+}
+/*FORMULARIO LOGIN REGISTER*/
+.formularioLoginRegister{
+    margin: 50px;
+    padding: 15px;
+}
 /*BOTON IR AL CATALOGO*/
 #btnCatalogo{
     padding: 15px;
@@ -87,7 +95,6 @@ header #logo{
     color: rgb(255, 0, 0);
     transition: all 0.5s;
 }
-
 /*SECTION CARDS AUTOS*/
 .cardAuto{
     width: 20rem;
@@ -151,7 +158,6 @@ header #logo{
     transform: skew(45deg) scale(2,1);
     transition: all 0.7s;
 }
-
 /*SECTION CARRITO*/
 #carrito{
     font-size: 0.8rem;
@@ -175,7 +181,6 @@ header #logo{
 #carrito .col-img img{
     width: 50%;
 }
-
 /*ICONOS REDES SOCIALES*/
 #iconWtsp{
     width: 50px;
@@ -232,7 +237,6 @@ header #logo{
     color: white;
     font-size: 2rem;
 }
-
 /*================================================ FOOTER ================================================*/
 footer div{
     width: 80%;
@@ -248,16 +252,12 @@ footer #footerDivLogo img{
 footer #footerDivNav ul{
     list-style: none;
 }
-
 footer #footerDivNav a{
     text-decoration: none;
     color: black;
 }
-
-/*EVENTOS*/
-/*Formulario*/
-form{
-    background-color: white;
+/*FORM DE CONTACTO.HTML: MODO CLARO Y MODO OSCURO*/
+#formularioContacto{
     box-shadow: 10px 10px 20px rgb(84, 80, 80);
     font-size: 20px;
     font-family: 'Fjalla One', sans-serif;

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQAM VW | Contacto</title>
+    <title>FAQAM VW | Catalogo</title>
     <!--CSS-->
     <link rel="stylesheet" href="../css/style.css">
     <!--BS CSS-->
@@ -20,8 +20,6 @@
     <!--FONTS-->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Exo:wght@100&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@100&family=Fjalla+One&display=swap"
-        rel="stylesheet">
     <!--FAVICON-->
     <link rel="shortcut icon" href="../image/FAQAMlogo-removebgpreview.png" type="image/x-icon">
 </head>
@@ -44,8 +42,8 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link " aria-current="page" href="../index.html">Inicio</a>
-                        <a class="nav-link" href="catalogo.html">Catalogo</a>
-                        <a class="nav-link active" href="contacto.html">Contacto</a>
+                        <a class="nav-link active" href="catalogo.html">Catalogo</a>
+                        <a class="nav-link" href="contacto.html">Contacto</a>
                     </div>
                 </div>
             </div>
@@ -57,61 +55,59 @@
     </header>
     <!--MAIN-->
     <main id="main">
-        <!--SECTION SOBRE NOSOTROS-->
-        <section class="container-fluid py-3 ">
-            <h3 class="pt-2 text-center fs-1 text-uppercase ">Sobre nosotros</h3>
-            <div class="row justify-content-xl-center align-items-xl-start my-4">
-                <div class="col-12 col-xl-5">
-                    <p class="lead lh-lg text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Commodi
-                        natus magnam odio dicta officiis esse fugit assumenda autem, molestias ducimus recusandae
-                        aliquid laudantium neque, magni possimus nam rerum, ab quibusdam distinctio exercitationem sunt!
-                        Eum quas id repellendus architecto et. Veritatis dolores mollitia consectetur libero culpa
-                        perferendis, inventore eveniet hic provident consequuntur ratione, ipsum illo recusandae!
-                        Blanditiis nisi dicta tempora omnis ratione eum quia non aliquid eius iusto consequatur,
-                        voluptatum perspiciatis nostrum voluptates ad ducimus inventore itaque voluptate! Cum, dolore
-                        quo.
-                    </p>
-                </div>
-                <div class="col-12 col-xl-5">
-                    <img class="w-75 d-block mx-auto mt-4 my-lg-3" src="../image/autos/vw2.jpg " alt="">
-                </div>
-            </div>
-        </section>
-        <!--SECTION FORMULARIO-->
-        <section class="container-fluid py-3 mb-5 bg-light">
-            <h3 class="pt-2 text-center fs-3 text-uppercase ">Envianos tu consulta</h3>
-            <div class="container ">
-                <div class="mb-2 text-center">
-                    <button id="btnModoClaro" class="btn btn-light m-3">Modo claro <i class="bi bi-brightness-high"></i>
-                    </button>
-                    <button id="btnModoOscuro" class="btn btn-dark m-3">Modo oscuro <i class="bi bi-moon"></i>
-                    </button>
-                </div>
-                <form id="formularioContacto" class="p-3">
+        <!--SECTION FORMULARIOS-->
+        <section class="container-fluid">
+            <div class="d-lg-flex justify-content-lg-center align-items-center">
+                <!--formulario login-->
+                <form action="" class="formularioLoginRegister">
+                    <h3>Inicia sesion</h3>
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre">
+                        <label for="correo" class="form-label">Correo electronico:</label>
+                        <input type="email" class="form-control" id="correo" placeholder="Corrreo electronico"
+                            required />
                     </div>
                     <div class="mb-3">
-                        <div>
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="example@gmail.com"
-                                aria-describedby="helpEmail">
-                        </div>
-                        <div id="helpEmail" class="form-text">
-                            Nunca compartiremos su correo electrónico con nadie más
-                        </div>
+                        <label for="password" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Contraseña" required />
                     </div>
-                    <div class="mb-3">
-                        <label for="msj" class="text-area mb-1">Su consulta</label>
-                        <textarea class="form-control" id="msj" rows="5"></textarea>
+                    <div class="container-fluid my-3 d-flex flex-column align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-primary mb-2" name="btnIniciarUsuario"
+                            id="btnIniciarUsuario">
+                            Iniciar sesion
+                        </button>
                     </div>
-
-                    <button type="submit" class="btn btn-success me-2">Enviar</button>
-                    <button type="reset" class="btn btn-danger ms-2">Restablecer</button>
+                    <div id="formularioLoginMsj">
+                    </div>
                 </form>
-            </div>
+                <!--formulario register-->
+                <form action="" class="formularioLoginRegister">
+                    <h3>¿Aun no tienes cuenta? Registrate!</h3>
+                    <div class="mb-3">
+                        <label for="nombreRegister" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreResgister" placeholder="Nombre" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellidoRegister" class="form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="apellidoRegister" placeholder="Apellido" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailRegister" class="form-label">Correo electronico:</label>
+                        <input type="email" class="form-control" id="emailRegister" placeholder="Corrreo electronico"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="contraseñaRegister" class="form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="contraseñaRegister" placeholder="Contraseña"
+                            required />
+                    </div>
+                    <div class="container-fluid my-3 d-flex flex-column align-items-center justify-content-center">
+                        <button class="btn btn-primary mb-2" name="btnCrearUsuario" id="btnCrearUsuario">
+                            Crear ususario
+                        </button>
+                    </div>
+                    <div id="formularioRegisterMsj">
+                    </div>
+                </form>
         </section>
         <!--ICONOS REDES SOCIALES-->
         <div id="iconWtsp">
@@ -144,7 +140,7 @@
         </div>
     </footer>
     <!--JS-->
-    <script src="../js/form.js"></script>
+    <script src="../js/usuario.js"></script>
     <!--BS JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

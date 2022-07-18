@@ -6,12 +6,12 @@ let botonMocoOscuro=document.getElementById("btnModoOscuro");
 
 //FUNCIONES
 function respuestaBtnModoClaro(){
-    let formulario=document.getElementById("formulario");
+    let formulario=document.getElementById("formularioContacto");
     formulario.classList.remove("formModoOscuro");
     formulario.classList.add("formModoClaro");
 }
 function respuestaBtnModoOscuro(){
-    let formulario=document.getElementById("formulario");
+    let formulario=document.getElementById("formularioContacto");
     formulario.classList.remove("formModoClaro");
     formulario.classList.add("formModoOscuro");
 }
