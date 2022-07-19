@@ -18,24 +18,25 @@ function registarUsuario(e){
     let nombre=document.getElementById("nombreResgister").value;
     let apellido=document.getElementById("apellidoRegister").value;
     let contraseña=document.getElementById("contraseñaRegister").value;
-    let nodo=document.getElementById("formularioRegisterMsj");
-    let nodoMsj=document.createElement("p");
-    nodoMsj.classList.add("msjUsuario");
-    nodo.innerHTML="";
-    nodo.appendChild(nodoMsj);
-    if(correo!="" && nombre!="" && apellido!="" && contraseña!=""){
-        if(buscarCorreo(correo, lstUsuarios)==-1){
-            const usuarioNuevo=new Usuario(lstUsuarios.length+1,nombre,apellido,correo,contraseña);
-            lstUsuarios.push(usuarioNuevo);
-            localStorage.setItem("lstUsuario",JSON.stringify(lstUsuarios));
-            nodoMsj.innerText="Usuario generado con exito"
-        }
-        else{
-            nodoMsj.innerText="El email ingresado ya tiene una cuenta asociada"
-        }
-    }else{
-        nodoMsj.innerText="Debe completar todos los campos";
-    }   
+    if(buscarCorreo(correo, lstUsuarios)==-1){
+        const usuarioNuevo=new Usuario(lstUsuarios.length+1,nombre,apellido,correo,contraseña);
+        lstUsuarios.push(usuarioNuevo);
+        localStorage.setItem("lstUsuario",JSON.stringify(lstUsuarios));
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Tu cuenta ha sido creada',
+            showConfirmButton: false,
+            timer: 2000
+          })
+    }
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Error...',
+            text: 'El mail ya tiene un usuario asociado!'
+        })
+    } 
 }
 function buscarCorreo(correoUsuario, listaUsuarios){
     let posEncontrado=-1;
@@ -55,34 +56,32 @@ function iniciarSesion(e){
     e.preventDefault();
     let correo=document.getElementById("correo").value;
     let contraseña=document.getElementById("password").value;
-    let nodo=document.getElementById("formularioLoginMsj");
-    let nodoMsj=document.createElement("p");
-    nodoMsj.classList.add("msjUsuario");
-    nodo.innerHTML="";
-    nodo.appendChild(nodoMsj);
-    if(correo!="" && contraseña!=""){
-        let posCorreo=buscarCorreo(correo, lstUsuarios);
-        if(posCorreo==-1){
-           nodoMsj.innerText="El email ingresado no posee una cuenta asociada"
-        }else{
+    let posCorreo=buscarCorreo(correo, lstUsuarios);
+    if(posCorreo==-1 || lstUsuarios[posCorreo].contraseña!=contraseña){
+        Swal.fire({
+            icon: 'error',
+            title: 'Datos ingresados incorrectos',
+            text: 'Correo o contraseña no coincidente'
+        })
+    }else{
             if (lstUsuarios[posCorreo].contraseña==contraseña){
-                nodoMsj.innerText="Inicio de sesion exitoso";
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Inicio de sesion exitoso',
+                    showConfirmButton: false,
+                    timer: 2000
+                  })
                 sessionStorage.setItem("usuario",correo);
                 sessionStorage.setItem("contraseña",contraseña);
-            }else{
-                nodoMsj.innerText="La contraseña ingresada no es valida";
-            }
         }
-    }else{
-        nodoMsj.innerText="Debe completar todos los campos";
     }
-    
 }
 //EVENTOS
-let btnCrearUsuario=document.getElementById("btnCrearUsuario");
-btnCrearUsuario.addEventListener("click",registarUsuario);
-let btnIniciarSesion=document.getElementById("btnIniciarUsuario");
-btnIniciarSesion.addEventListener("click",iniciarSesion);
+let formCrearUsuario=document.getElementById("formRegister");
+formCrearUsuario.addEventListener("submit",registarUsuario);
+let formIniciarSesion=document.getElementById("formLogin");
+formIniciarSesion.addEventListener("submit",iniciarSesion);
 
 
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQAM VW | Catalogo</title>
+    <title>FAQAM VW | Usuario</title>
     <!--CSS-->
     <link rel="stylesheet" href="../css/style.css">
     <!--BS CSS-->
@@ -42,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link " aria-current="page" href="../index.html">Inicio</a>
-                        <a class="nav-link active" href="catalogo.html">Catalogo</a>
+                        <a class="nav-link" href="catalogo.html">Catalogo</a>
                         <a class="nav-link" href="contacto.html">Contacto</a>
                     </div>
                 </div>
@@ -56,11 +56,11 @@
     <!--MAIN-->
     <main id="main">
         <!--SECTION FORMULARIOS-->
-        <section class="container-fluid">
-            <div class="d-lg-flex justify-content-lg-center align-items-center">
+        <section class="container-fluid  p-3">
+            <div class="d-lg-flex justify-content-lg-around">
                 <!--formulario login-->
-                <form action="" class="formularioLoginRegister">
-                    <h3>Inicia sesion</h3>
+                <form action="" class="formularioLoginRegister" id="formLogin">
+                    <h3 class="text-center">Inicia sesion</h3>
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo electronico:</label>
                         <input type="email" class="form-control" id="correo" placeholder="Corrreo electronico"
@@ -71,17 +71,14 @@
                         <input type="password" class="form-control" id="password" placeholder="Contraseña" required />
                     </div>
                     <div class="container-fluid my-3 d-flex flex-column align-items-center justify-content-center">
-                        <button type="submit" class="btn btn-primary mb-2" name="btnIniciarUsuario"
-                            id="btnIniciarUsuario">
+                        <button type="submit" class="btn btn-primary mb-2">
                             Iniciar sesion
                         </button>
                     </div>
-                    <div id="formularioLoginMsj">
-                    </div>
                 </form>
                 <!--formulario register-->
-                <form action="" class="formularioLoginRegister">
-                    <h3>¿Aun no tienes cuenta? Registrate!</h3>
+                <form action="" class="formularioLoginRegister" id="formRegister">
+                    <h3 class="text-center">¿Aun no tienes cuenta? Registrate!</h3>
                     <div class="mb-3">
                         <label for="nombreRegister" class="form-label">Nombre:</label>
                         <input type="text" class="form-control" id="nombreResgister" placeholder="Nombre" required />
@@ -101,13 +98,12 @@
                             required />
                     </div>
                     <div class="container-fluid my-3 d-flex flex-column align-items-center justify-content-center">
-                        <button class="btn btn-primary mb-2" name="btnCrearUsuario" id="btnCrearUsuario">
+                        <button type="submit" class="btn btn-primary mb-2">
                             Crear ususario
                         </button>
                     </div>
-                    <div id="formularioRegisterMsj">
-                    </div>
                 </form>
+            </div>
         </section>
         <!--ICONOS REDES SOCIALES-->
         <div id="iconWtsp">
@@ -139,6 +135,8 @@
             </ul>
         </div>
     </footer>
+    <!--ALERTSWEET CDN-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--JS-->
     <script src="../js/usuario.js"></script>
     <!--BS JS-->

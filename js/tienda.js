@@ -175,6 +175,13 @@ function renderizarCarrito(){
 
 //Funcion de respuesta al evento "click" en cualquiera de los botones "agregar al carrito"
 function respuestaBtnAgregarCarrito(event){
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Producto agregado al carrito',
+        showConfirmButton: false,
+        timer: 1000
+      })
     event.preventDefault(); //para que no se recargue la pagina al clickear en el vinculo
     const botonClickeado= event.target; //con este capturo cual es el boton que estan clickeando
     const cardElegida = botonClickeado.closest(".cardAuto");  //con este capturo cual es el elemento mas cercano con esa clase (es decir toda la card)
@@ -202,13 +209,47 @@ function respuestaBtnAgregarCarrito(event){
 
 //Funcion de respuesta al evento "click" en cualquiera de los botones "x" del carrito. Elimina del carrito el item deseado. 
 function respuestaBtnEliminarItem(event){
-    let botonClickeado=event.target;
-    const itemElegido = botonClickeado.closest(".itemCarrito");
-    let itemElegidoNombre=(itemElegido.querySelector(".itemCarritoNombre")).innerText;
-    const elementoEliminar=carrito.find((el)=>el.nombre===itemElegidoNombre);
-    let posicion=carrito.indexOf(elementoEliminar);
-    carrito.splice(posicion,1);
-    renderizarCarrito();
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: 'btn btn-success ms-3',
+        cancelButton: 'btn btn-danger me-3'
+    },
+    buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        title: 'Estas seguro?',
+        text: "El producto del carrito se eliminará!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, quiero borrarlo!',
+        cancelButtonText: 'No, mejor dejalo!',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+            'Borrado!',
+            'El producto se elimino del carrito.',
+            'success'
+            )
+            let botonClickeado=event.target;
+            const itemElegido = botonClickeado.closest(".itemCarrito");
+            let itemElegidoNombre=(itemElegido.querySelector(".itemCarritoNombre")).innerText;
+            const elementoEliminar=carrito.find((el)=>el.nombre===itemElegidoNombre);
+            let posicion=carrito.indexOf(elementoEliminar);
+            carrito.splice(posicion,1);
+            renderizarCarrito();
+        } else if (
+          /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) 
+        {
+        swalWithBootstrapButtons.fire(
+        'Cancelado',
+        'El producto sigue estando en tu carrito :)',
+        'error'
+        )
+        }
+    })
 }
 
 //Funcion de respuesta al evento "click" en el boton vaciar carrito. Elimina todos elementos del carrito.
@@ -219,7 +260,13 @@ function vaciarCarrito(){
         }
         renderizarCarrito(); 
     }else{
-        alert("Aun no ha agregado nada al carrito!");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            text: 'Aun el carrito está vacio!',
+            timer: 1500
+          })    
     }
 }
 
@@ -236,10 +283,20 @@ function calcularTotal(){
 //Funcion de respuesta al evento "click" en el boton confirmar compra. 
 function confirmarCompra(){
     if(carrito.length!=0){
-        alert("Su compra ha sido confirmada. Gracias!\nLe enviaremos un mail con mas detalles");
         vaciarCarrito();
+        Swal.fire(
+            'Has confirmado la compra',
+            'Buena elección!',
+            'success'
+          )
     }else{
-        alert("Aun no ha agregado nada al carrito!");
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            text: 'Aun el carrito está vacio!',
+            timer: 1500
+          })    
     }
 }
 
