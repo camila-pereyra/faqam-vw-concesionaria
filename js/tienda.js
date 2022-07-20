@@ -62,12 +62,13 @@ baseDeDatos.push(auto11);
 baseDeDatos.push(auto12);
 
 //INICIO - Lo primero que hago es crear las card Auto y el carrito (en caso de que el carrito este cargado desde LocalStorage)
-renderizarProductos();
+renderizarProductos(baseDeDatos);
 renderizarCarrito();
 //FUNCIONES
 //DOM -Funcion que crea las card Auto de acuerdo al array baseDeDatos. 
-function renderizarProductos() {
-    baseDeDatos.forEach ((info) => {
+function renderizarProductos(arregloProductos) {
+    DOMProductos.innerHTML="";
+    arregloProductos.forEach ((info) => {
         // Estructura Gral
         const miNodoEstructura = document.createElement('div');
         miNodoEstructura.classList.add('cardAuto');
@@ -170,7 +171,7 @@ function renderizarCarrito(){
     });
     localStorage.setItem("carrito",JSON.stringify(carrito));  
     let sumaTotal=document.getElementById("sumaCompra");
-    sumaTotal.innerText="TOTAL: $"+calcularTotal();
+    sumaTotal.innerText="TOTAL: $"+calcularTotal(carrito);
 }
 
 //Funcion de respuesta al evento "click" en cualquiera de los botones "agregar al carrito"
@@ -271,11 +272,11 @@ function vaciarCarrito(){
 }
 
 //Funcion que calcula la suma total de todos elementos del carrito.
-function calcularTotal(){
+function calcularTotal(lstCarrito){
     let suma=0;
-    carrito.forEach(element => {
-        
-        suma=suma+element.precioTotal;
+    lstCarrito.forEach(element => {
+        let {precioTotal} = element;
+        suma+=precioTotal;
     });
     return suma;
 } 
@@ -299,6 +300,72 @@ function confirmarCompra(){
           })    
     }
 }
+function ordenarPorModelo(){
+    let productosOrdenados= [...baseDeDatos];
+    productosOrdenados.sort((obj1,obj2)=>{
+        if(obj1.modelo>obj2.modelo){
+            return 1;
+        }else if(obj1.modelo<obj2.modelo){
+            return -1;
+        }else{
+            return 0;
+        }
+    })
+    renderizarProductos(productosOrdenados);
+}
+function ordenarPorModeloReverse(){
+    let productosOrdenados= [...baseDeDatos];
+    productosOrdenados.sort((obj1,obj2)=>{
+        if(obj1.modelo<obj2.modelo){
+            return 1;
+        }else if(obj1.modelo>obj2.modelo){
+            return -1;
+        }else{
+            return 0;
+        }
+    })
+    renderizarProductos(productosOrdenados);
+}
+function ordenarPorPrecio(){
+    let productosOrdenados= [...baseDeDatos];
+    productosOrdenados.sort((obj1,obj2)=>{
+        if(obj1.precio>obj2.precio){
+            return 1;
+        }else if(obj1.precio<obj2.precio){
+            return -1;
+        }else{
+            return 0;
+        }
+    })
+    renderizarProductos(productosOrdenados);
+}
+function ordenarPorPrecioReverse(){
+    let productosOrdenados= [...baseDeDatos];
+    productosOrdenados.sort((obj1,obj2)=>{
+        if(obj1.precio<obj2.precio){
+            return 1;
+        }else if(obj1.precio>obj2.precio){
+            return -1;
+        }else{
+            return 0;
+        }
+    })
+    renderizarProductos(productosOrdenados);
+}
+function filtrarPorCeroKM(){
+    let filtradosPorCeroKM=[];
+    for(let i=0;i<baseDeDatos.length;i++){
+        baseDeDatos[i].km==0 && filtradosPorCeroKM.push(baseDeDatos[i]);
+    }
+    renderizarProductos(filtradosPorCeroKM);
+}
+function filtrarPorUsados(){
+    let filtradosPorUsados=[];
+    for(let i=0;i<baseDeDatos.length;i++){
+       baseDeDatos[i].km!=0 && filtradosPorUsados.push(baseDeDatos[i]);
+    }
+    renderizarProductos(filtradosPorUsados);
+}
 
 //EVENTOS
 //BOTONES AGREGAR AL CARRITO
@@ -321,5 +388,32 @@ btnVaciarCarrito.addEventListener("click",vaciarCarrito);
 let btnConfirmarCompra=document.getElementById("btnConfirmarCompra");
 btnConfirmarCompra.addEventListener("click",confirmarCompra);
 
+//BOTON ORDENAR POR PRECIO (menor a mayor)
+let btnOrdenarPorPrecio=document.getElementById("btnOrdernarPorPrecio");
+btnOrdenarPorPrecio.addEventListener("click",ordenarPorPrecio);
+
+//BOTON ORDENAR POR PRECIO (mayor a menor)
+let btnOrdenarPorPrecioReverse=document.getElementById("btnOrdernarPorPrecioReverse");
+btnOrdenarPorPrecioReverse.addEventListener("click",ordenarPorPrecioReverse);
+
+//BOTON ORDENAR POR MODELO (viejos a nuevos)
+let btnOrdenarPorModelo=document.getElementById("btnOrdernarPorModelo");
+btnOrdenarPorModelo.addEventListener("click",ordenarPorModelo);
+
+//BOTON ORDENAR POR MODELO (nuevos a viejos)
+let btnOrdenarPorModeloReverse=document.getElementById("btnOrdernarPorModeloReverse");
+btnOrdenarPorModeloReverse.addEventListener("click",ordenarPorModeloReverse);
+
+//BOTON FILTRAR POR 0KM
+let btnFiltrarPorCeroKm=document.getElementById("btnFiltrarPorCeroKm");
+btnFiltrarPorCeroKm.addEventListener("click",filtrarPorCeroKM);
+
+//BOTON FILTRAR POR USADOS
+let btnFiltrarPorUsados=document.getElementById("btnFiltrarPorUsados");
+btnFiltrarPorUsados.addEventListener("click",filtrarPorUsados);
+
+//BOTON NO ORDENAR (SIN FILTROS)
+let btnSinOrdenar=document.getElementById("btnSinOrdenar");
+btnSinOrdenar.addEventListener("click", ()=>renderizarProductos(baseDeDatos));
 
 

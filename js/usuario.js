@@ -10,7 +10,16 @@ class Usuario{
 
 //Inicio el array vacio o bien con lo que hay en el Local Storage
 const lstUsuarios= (JSON.parse(localStorage.getItem("lstUsuario")) || []);
-
+function borrarCamposFormRegister(){
+    let inputNombre=document.getElementById("nombreResgister");
+    let inputApellido=document.getElementById("apellidoRegister");
+    let inputCorreo=document.getElementById("emailRegister");
+    let inputContraseña=document.getElementById("contraseñaRegister");
+    inputNombre.value="";
+    inputApellido.value="";
+    inputCorreo.value="";
+    inputContraseña.value="";
+}
 //REGISTRAR USUARIO
 function registarUsuario(e){
     e.preventDefault();
@@ -29,6 +38,7 @@ function registarUsuario(e){
             showConfirmButton: false,
             timer: 2000
           })
+          borrarCamposFormRegister();
     }
     else{
         Swal.fire({
@@ -39,17 +49,19 @@ function registarUsuario(e){
     } 
 }
 function buscarCorreo(correoUsuario, listaUsuarios){
-    let posEncontrado=-1;
-    
-
-    if(listaUsuarios.length!=0){
-        for(let i=0; i<listaUsuarios.length;i++){
-            if(listaUsuarios[i].email==correoUsuario){
-                posEncontrado=i;
-            }
-        }
-   } 
+    let i=0;
+    let posEncontrado;
+    while(i<lstUsuarios.length){
+        listaUsuarios[i].email==correoUsuario ? posEncontrado=i : posEncontrado=-1;
+        posEncontrado!=-1 ? i=lstUsuarios.length : i++;
+    }
     return posEncontrado;
+}
+function borrarCamposFormLogin(){
+    let inputCorreo=document.getElementById("correo");
+    let inputContraseña=document.getElementById("password");
+    inputCorreo.value="";
+    inputContraseña.value="";
 }
 //INICIAR SESION 
 function iniciarSesion(e){
@@ -74,9 +86,11 @@ function iniciarSesion(e){
                   })
                 sessionStorage.setItem("usuario",correo);
                 sessionStorage.setItem("contraseña",contraseña);
+                borrarCamposFormLogin();
         }
     }
 }
+
 //EVENTOS
 let formCrearUsuario=document.getElementById("formRegister");
 formCrearUsuario.addEventListener("submit",registarUsuario);
