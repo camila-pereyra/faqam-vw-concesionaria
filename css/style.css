@@ -47,18 +47,26 @@ header #logo{
 .divInfo{
     width: 100%;
     height: 100%;
+    padding: 10px;
     color: white;
+    text-transform: uppercase;
+    text-align: justify;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: absolute;
-    font-size: 25px;
+    font-size: 13px;
     font-weight: bold;
     background: linear-gradient(black, rgba(0,0,0,0.5));
     transform: scale(1);
     opacity: 0;
     transition: all 1s;
+}
+@media (min-width:992px) {
+    .divInfo{
+        font-size: 18px;
+    } 
 }
 .divInfo:hover{
     transform: scale(1);
@@ -80,7 +88,6 @@ header #logo{
 .formularioLoginRegister:hover{
     transition: all 1s;
     box-shadow: 10px 10px 25px rgb(0, 0, 0);
-
 }
 @media (min-width:992px) {
     .formularioLoginRegister{
