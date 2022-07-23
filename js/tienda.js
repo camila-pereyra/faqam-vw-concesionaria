@@ -20,12 +20,6 @@ class ItemCarrito{
         this.precioTotal=precioTotal;
         this.img=img;      
     }
-    setCantidad(cantidad){
-        this.cantidad=cantidad;
-    }
-    setPrecioTotal(precioTotal){
-        this.precioTotal=precioTotal;
-    }
 }
 
 //VARIABLES
@@ -64,8 +58,9 @@ baseDeDatos.push(auto12);
 //INICIO - Lo primero que hago es crear las card Auto y el carrito (en caso de que el carrito este cargado desde LocalStorage)
 renderizarProductos(baseDeDatos);
 renderizarCarrito();
+
 //FUNCIONES
-//DOM -Funcion que crea las card Auto de acuerdo al array baseDeDatos. 
+//DOM -Funcion que crea las card Auto de acuerdo al arregloProductos pasado por parametro (puede ser baseDeDatos, o algun array ordenado o filtrado de productos) 
 function renderizarProductos(arregloProductos) {
     DOMProductos.innerHTML="";
     arregloProductos.forEach ((info) => {
@@ -95,11 +90,11 @@ function renderizarProductos(arregloProductos) {
         const miNodoKM = document.createElement('p');
         miNodoKM.classList.add('cardAuto-km');
         miNodoKM.innerText = info.km+"KM";
-        //BOTON AGREGAR"
-        const miNodoBoton =document.createElement('a');
-        miNodoBoton.classList.add("cardAuto-btn");
-        miNodoBoton.setAttribute("href","");
+        //BOTON AGREGAR AL CARRITO
+        const miNodoBoton =document.createElement('button');
+        miNodoBoton.classList.add("btn","btn-outline-success","cardAuto-btn");
         miNodoBoton.innerText="Agregar al carrito";
+        miNodoBoton.addEventListener("click",respuestaBtnAgregarCarrito);
        //Insertamos los nodos
        miNodoEstructura.appendChild(miNodoImagen);
        miNodoEstructuraContent.appendChild(miNodoTitle);
@@ -183,7 +178,6 @@ function respuestaBtnAgregarCarrito(event){
         showConfirmButton: false,
         timer: 1000
       })
-    event.preventDefault(); //para que no se recargue la pagina al clickear en el vinculo
     const botonClickeado= event.target; //con este capturo cual es el boton que estan clickeando
     const cardElegida = botonClickeado.closest(".cardAuto");  //con este capturo cual es el elemento mas cercano con esa clase (es decir toda la card)
     //Voy a desglozar la tarjeta
@@ -196,14 +190,14 @@ function respuestaBtnAgregarCarrito(event){
     const itemAgregar=carrito.find(el=>el.nombre==itemNombre);
     //si el item no esta en el carrito, lo agrego
     if(itemAgregar==undefined){
-        const item=new ItemCarrito(itemNombre,itemModelo,itemKm,itemPrecioInt,1,itemPrecioInt,itemImage);
+        let item=new ItemCarrito(itemNombre,itemModelo,itemKm,itemPrecioInt,1,itemPrecioInt,itemImage);
         carrito.push(item);
     }
     //si el item esta en el carrito, le modifico la cantidad y el precioTotal del ItemCarrito
     else{
         let cantidadNueva=itemAgregar.cantidad+1;
-        itemAgregar.setCantidad(cantidadNueva);
-        itemAgregar.setPrecioTotal(itemAgregar.precio*cantidadNueva);
+        itemAgregar.cantidad=(cantidadNueva);
+        itemAgregar.precioTotal=(itemAgregar.precio*cantidadNueva);
     }
     renderizarCarrito();
 }
@@ -300,6 +294,7 @@ function confirmarCompra(){
           })    
     }
 }
+//Funcion de respuesta al evento "click" a alguno de los botonces de ordenamiento o filtro. 
 function ordenarPorModelo(){
     let productosOrdenados= [...baseDeDatos];
     productosOrdenados.sort((obj1,obj2)=>{
@@ -314,7 +309,7 @@ function ordenarPorModelo(){
     renderizarProductos(productosOrdenados);
 }
 function ordenarPorModeloReverse(){
-    let productosOrdenados= [...baseDeDatos];
+    let productosOrdenados=  [...baseDeDatos];
     productosOrdenados.sort((obj1,obj2)=>{
         if(obj1.modelo<obj2.modelo){
             return 1;
@@ -368,12 +363,6 @@ function filtrarPorUsados(){
 }
 
 //EVENTOS
-//BOTONES AGREGAR AL CARRITO
-const botonesAgregarCarrito=document.querySelectorAll(".cardAuto-btn")
-botonesAgregarCarrito.forEach(btn => {
-    btn.addEventListener("click",respuestaBtnAgregarCarrito);
-});
-
 //BOTONES ELIMINAR ITEM
 let botonesEliminarItem=document.querySelectorAll(".btnEliminarItem");
 for(let boton of botonesEliminarItem){
