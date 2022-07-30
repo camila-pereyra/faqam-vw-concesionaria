@@ -1,6 +1,5 @@
 class Usuario{
-    constructor(id,nombre,apellido,email,contraseña){
-        this.id=id;
+    constructor(nombre,apellido,email,contraseña){
         this.nombre=nombre;
         this.apellido=apellido;
         this.email=email;
@@ -9,17 +8,30 @@ class Usuario{
 }
 
 //Inicio el array vacio o bien con lo que hay en el Local Storage
-const lstUsuarios= (JSON.parse(localStorage.getItem("lstUsuario")) || []);
-function borrarCamposFormRegister(){
-    let inputNombre=document.getElementById("nombreResgister");
-    let inputApellido=document.getElementById("apellidoRegister");
-    let inputCorreo=document.getElementById("emailRegister");
-    let inputContraseña=document.getElementById("contraseñaRegister");
-    inputNombre.value="";
-    inputApellido.value="";
-    inputCorreo.value="";
-    inputContraseña.value="";
+const listaUsuarios=JSON.parse(localStorage.getItem("lstUsuarios")) || [];
+
+//funcion que utiliza una API para generar usuarios aleatorios y agregarlos a la lista de usuarios
+const generarUsuariosAPI= async () => {
+    try {
+      const resp = await fetch("https://random-data-api.com/api/users/random_user?size=10");
+      const usuarios=await resp.json()
+      usuarios.forEach(usuario => {
+        const user=new Usuario(usuario.first_name,usuario.last_name,usuario.email,usuario.password);
+        listaUsuarios.push(user);
+        });
+        localStorage.setItem("lstUsuarios",JSON.stringify(listaUsuarios))
+    } catch(err) {
+      console.log("error: ", err);
+    }
+} 
+
+//si la lista de usuarios esta vacia (es decir, es la primera vez que ingreso a la página) se ejecuta la funcion generarUsuariosAPI. 
+//Caso contrario, los carga del localStorage 
+if(listaUsuarios.length===0){
+    generarUsuariosAPI();
 }
+
+
 //REGISTRAR USUARIO
 function registarUsuario(e){
     e.preventDefault();
@@ -27,14 +39,14 @@ function registarUsuario(e){
     let nombre=document.getElementById("nombreResgister").value;
     let apellido=document.getElementById("apellidoRegister").value;
     let contraseña=document.getElementById("contraseñaRegister").value;
-    if(buscarCorreo(correo, lstUsuarios)==-1){
-        const usuarioNuevo=new Usuario(lstUsuarios.length+1,nombre,apellido,correo,contraseña);
-        lstUsuarios.push(usuarioNuevo);
-        localStorage.setItem("lstUsuario",JSON.stringify(lstUsuarios));
+    if(buscarCorreo(correo, listaUsuarios)==-1){
+        const usuarioNuevo=new Usuario(nombre,apellido,correo,contraseña);
+        listaUsuarios.push(usuarioNuevo);
+        localStorage.setItem("lstUsuarios",JSON.stringify(listaUsuarios));
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Tu cuenta ha sido creada',
+            title: 'Tu cuenta ha sido creada. Ahora inicia sesion!',
             showConfirmButton: false,
             timer: 2000
           })
@@ -48,12 +60,24 @@ function registarUsuario(e){
         })
     } 
 }
+
+function borrarCamposFormRegister(){
+    let inputNombre=document.getElementById("nombreResgister");
+    let inputApellido=document.getElementById("apellidoRegister");
+    let inputCorreo=document.getElementById("emailRegister");
+    let inputContraseña=document.getElementById("contraseñaRegister");
+    inputNombre.value="";
+    inputApellido.value="";
+    inputCorreo.value="";
+    inputContraseña.value="";
+}
+
 function buscarCorreo(correoUsuario, listaUsuarios){
     let i=0;
     let posEncontrado;
-    while(i<lstUsuarios.length){
+    while(i<listaUsuarios.length){
         listaUsuarios[i].email==correoUsuario ? posEncontrado=i : posEncontrado=-1;
-        posEncontrado!=-1 ? i=lstUsuarios.length : i++;
+        posEncontrado!=-1 ? i=listaUsuarios.length : i++;
     }
     return posEncontrado;
 }
@@ -68,15 +92,15 @@ function iniciarSesion(e){
     e.preventDefault();
     let correo=document.getElementById("correo").value;
     let contraseña=document.getElementById("password").value;
-    let posCorreo=buscarCorreo(correo, lstUsuarios);
-    if(posCorreo==-1 || lstUsuarios[posCorreo].contraseña!=contraseña){
+    let posCorreo=buscarCorreo(correo, listaUsuarios);
+    if(posCorreo==-1 || listaUsuarios[posCorreo].contraseña!=contraseña){
         Swal.fire({
             icon: 'error',
             title: 'Datos ingresados incorrectos',
             text: 'Correo o contraseña no coincidente'
         })
     }else{
-            if (lstUsuarios[posCorreo].contraseña==contraseña){
+            if (listaUsuarios[posCorreo].contraseña==contraseña){
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -84,8 +108,8 @@ function iniciarSesion(e){
                     showConfirmButton: false,
                     timer: 2000
                   })
-                sessionStorage.setItem("usuario",correo);
-                sessionStorage.setItem("contraseña",contraseña);
+                sessionStorage.setItem("usuario",JSON.stringify(listaUsuarios[posCorreo]));
+                updateMsjBienvenida();
                 borrarCamposFormLogin();
         }
     }
@@ -96,6 +120,10 @@ let formCrearUsuario=document.getElementById("formRegister");
 formCrearUsuario.addEventListener("submit",registarUsuario);
 let formIniciarSesion=document.getElementById("formLogin");
 formIniciarSesion.addEventListener("submit",iniciarSesion);
+
+
+
+
 
 
 
