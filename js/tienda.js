@@ -1,14 +1,3 @@
-//CLASE AUTO
-class Auto{
-    constructor(nombre, modelo, precio, km, img){
-        this.nombre=nombre;
-        this.modelo=modelo;
-        this.precio=precio;
-        this.km=km;
-        this.img=img;      
-    }
-}
-
 //CLASE ITEM CARRITO
 class ItemCarrito{
     constructor(nombre, modelo,km, precio, cantidad, precioTotal, img){
@@ -23,46 +12,24 @@ class ItemCarrito{
 }
 
 //VARIABLES
-const baseDeDatos=[]; 
-const DOMProductos=document.getElementById("containerCards");
 const carrito=JSON.parse(localStorage.getItem("carrito"))|| [];
 const DOMCarrito=document.getElementById("items");
+const productos=document.getElementById("containerCards");
+const stock= JSON.parse(localStorage.getItem("lstProductos")) || [];
 
-//Creo los objetos del tipo Auto
-const auto1=new Auto("BORA",2013,1700000,120000,"../image/autos/bora.jpg");
-const auto2=new Auto("AMAROK",2022,7000000,0,"../image/autos/amarok.png");
-const auto3=new Auto("GOL",2007,800000,1500000,"../image/autos/gol.jpg");
-const auto4=new Auto("PASSAT",2018,2900000,90000,"../image/autos/passat.jpg");
-const auto5=new Auto("POLO",2022,3000000,0,"../image/autos/polo.jpg");
-const auto6=new Auto("TAOS",2022,3800000,0,"../image/autos/taos.jpg");
-const auto7=new Auto("TIGUAN",2022,4800000,0,"../image/autos/tiguan.jpg");
-const auto8=new Auto("UP",2018,2000000,60000,"../image/autos/up.jpeg");
-const auto9=new Auto("VENTO",2017,2400000,100000,"../image/autos/vento.jpg");
-const auto10=new Auto("VIRTUS",2020,2950000,30000,"../image/autos/virtus.jpg");
-const auto11=new Auto("FOX",2007,1000000,180000,"../image/autos/fox.jpg");
-const auto12=new Auto("GOLF",2022,4000000,0,"../image/autos/golf.jpg");
-//Agrego al array base de datos los objetos Auto
-baseDeDatos.push(auto1);
-baseDeDatos.push(auto2);
-baseDeDatos.push(auto3);
-baseDeDatos.push(auto4);
-baseDeDatos.push(auto5);
-baseDeDatos.push(auto6);
-baseDeDatos.push(auto7);
-baseDeDatos.push(auto8);
-baseDeDatos.push(auto9);
-baseDeDatos.push(auto10);
-baseDeDatos.push(auto11);
-baseDeDatos.push(auto12);
 
-//INICIO - Lo primero que hago es crear las card Auto y el carrito (en caso de que el carrito este cargado desde LocalStorage)
-renderizarProductos(baseDeDatos);
-renderizarCarrito();
+const iniciarStock = async () =>{
+    let resp= await fetch("../stock.json");
+    let arrProductos=await resp.json();
+    localStorage.setItem("lstProductos",JSON.stringify(arrProductos));
+    renderizarProductos(arrProductos);
+} 
 
-//FUNCIONES
-//DOM -Funcion que crea las card Auto de acuerdo al arregloProductos pasado por parametro (puede ser baseDeDatos, o algun array ordenado o filtrado de productos) 
+iniciarStock();
+
+//DOM -Funcion que crea las card Auto de acuerdo al arregloProductos pasado por parametro (puede ser stock, o algun array ordenado o filtrado de productos) 
 function renderizarProductos(arregloProductos) {
-    DOMProductos.innerHTML="";
+    productos.innerHTML="";
     arregloProductos.forEach ((info) => {
         // Estructura Gral
         const miNodoEstructura = document.createElement('div');
@@ -94,7 +61,7 @@ function renderizarProductos(arregloProductos) {
         const miNodoBoton =document.createElement('button');
         miNodoBoton.classList.add("btn","btn-outline-success","cardAuto-btn");
         miNodoBoton.innerText="Agregar al carrito";
-        miNodoBoton.addEventListener("click",respuestaBtnAgregarCarrito);
+       miNodoBoton.addEventListener("click",respuestaBtnAgregarCarrito);
        //Insertamos los nodos
        miNodoEstructura.appendChild(miNodoImagen);
        miNodoEstructuraContent.appendChild(miNodoTitle);
@@ -103,10 +70,13 @@ function renderizarProductos(arregloProductos) {
        miNodoEstructuraContent.appendChild(miNodoKM);
        miNodoEstructuraContent.appendChild(miNodoBoton);
        miNodoEstructura.appendChild(miNodoEstructuraContent);
-       DOMProductos.appendChild(miNodoEstructura);
+       productos.appendChild(miNodoEstructura);
     })   
 };
 
+renderizarCarrito();
+
+//FUNCIONES
 //DOM - Funcion que crea los items del carrito de acuerdo  al array carrito. 
 function renderizarCarrito(){
     // Vaciamos todo el html
@@ -296,7 +266,7 @@ function confirmarCompra(){
 }
 //Funcion de respuesta al evento "click" a alguno de los botonces de ordenamiento o filtro. 
 function ordenarPorModelo(){
-    let productosOrdenados= [...baseDeDatos];
+    let productosOrdenados= [...stock];
     productosOrdenados.sort((obj1,obj2)=>{
         if(obj1.modelo>obj2.modelo){
             return 1;
@@ -309,7 +279,7 @@ function ordenarPorModelo(){
     renderizarProductos(productosOrdenados);
 }
 function ordenarPorModeloReverse(){
-    let productosOrdenados=  [...baseDeDatos];
+    let productosOrdenados=  [...stock];
     productosOrdenados.sort((obj1,obj2)=>{
         if(obj1.modelo<obj2.modelo){
             return 1;
@@ -322,7 +292,7 @@ function ordenarPorModeloReverse(){
     renderizarProductos(productosOrdenados);
 }
 function ordenarPorPrecio(){
-    let productosOrdenados= [...baseDeDatos];
+    let productosOrdenados= [...stock];
     productosOrdenados.sort((obj1,obj2)=>{
         if(obj1.precio>obj2.precio){
             return 1;
@@ -335,7 +305,7 @@ function ordenarPorPrecio(){
     renderizarProductos(productosOrdenados);
 }
 function ordenarPorPrecioReverse(){
-    let productosOrdenados= [...baseDeDatos];
+    let productosOrdenados= [...stock];
     productosOrdenados.sort((obj1,obj2)=>{
         if(obj1.precio<obj2.precio){
             return 1;
@@ -349,15 +319,15 @@ function ordenarPorPrecioReverse(){
 }
 function filtrarPorCeroKM(){
     let filtradosPorCeroKM=[];
-    for(let i=0;i<baseDeDatos.length;i++){
-        baseDeDatos[i].km==0 && filtradosPorCeroKM.push(baseDeDatos[i]);
+    for(let i=0;i<stock.length;i++){
+        stock[i].km==0 && filtradosPorCeroKM.push(stock[i]);
     }
     renderizarProductos(filtradosPorCeroKM);
 }
 function filtrarPorUsados(){
     let filtradosPorUsados=[];
-    for(let i=0;i<baseDeDatos.length;i++){
-       baseDeDatos[i].km!=0 && filtradosPorUsados.push(baseDeDatos[i]);
+    for(let i=0;i<stock.length;i++){
+        stock[i].km!=0 && filtradosPorUsados.push(stock[i]);
     }
     renderizarProductos(filtradosPorUsados);
 }
@@ -403,6 +373,6 @@ btnFiltrarPorUsados.addEventListener("click",filtrarPorUsados);
 
 //BOTON NO ORDENAR (SIN FILTROS)
 let btnSinOrdenar=document.getElementById("btnSinOrdenar");
-btnSinOrdenar.addEventListener("click", ()=>renderizarProductos(baseDeDatos));
+btnSinOrdenar.addEventListener("click", ()=>renderizarProductos(stock));
 
 

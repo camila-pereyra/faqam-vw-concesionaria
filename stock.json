@@ -1,0 +1,14 @@
+[
+    {"nombre":"BORA","modelo": 2013,"precio":1700000,"km":120000,"img":"../image/autos/bora.jpg"},
+    {"nombre":"AMAROK","modelo": 2022,"precio":7000000,"km":0,"img":"../image/autos/amarok.png"},
+    {"nombre":"GOL","modelo": 2007,"precio":800000,"km":150000,"img":"../image/autos/gol.jpg"},
+    {"nombre":"PASSAT","modelo": 2018,"precio":2900000,"km":90000,"img":"../image/autos/passat.jpg"},
+    {"nombre":"POLO","modelo": 2022,"precio":3000000,"km":0,"img":"../image/autos/polo.jpg"},
+    {"nombre":"TAOS","modelo": 2022,"precio":3800000,"km":0,"img":"../image/autos/taos.jpg"},
+    {"nombre":"TIGUAN","modelo": 2022,"precio":4800000,"km":0,"img":"../image/autos/tiguan.jpg"},
+    {"nombre":"UP","modelo": 2018,"precio":2000000,"km":60000,"img":"../image/autos/up.jpeg"},
+    {"nombre":"VENTO","modelo": 2017,"precio":2400000,"km":100000,"img":"../image/autos/vento.jpg"},
+    {"nombre":"VIRTUS","modelo": 2020,"precio":2950000,"km":30000,"img":"../image/autos/virtus.jpg"},
+    {"nombre":"FOX","modelo": 2007,"precio":1000000,"km":180000,"img":"../image/autos/fox.jpg"},
+    {"nombre":"GOLF","modelo": 2022,"precio":4000000,"km":0,"img":"../image/autos/golf.jpg"}
+]
