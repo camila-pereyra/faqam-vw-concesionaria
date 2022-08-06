@@ -165,27 +165,42 @@ header #logo{
     text-transform: uppercase;
 }
 /*SECTION CARRITO*/
-#carrito{
-    font-size: 0.8rem;
+.carritoFont{
+    font-size:10px;
 }
-#carrito #carrito-title-col{
-    width: 100%;
-    margin: auto;
-    padding: 5px 0 5px 0;
-    font-weight: bold;
-    border-top: solid black 3px;    
-    border-bottom: solid black 3px;    
+@media (min-width:576px) {
+    .carritoFont{
+        font-size:15px;
+    }
 }
-#carrito-title-col div{
-    margin: 0;
-    padding: 0;
+.itemCarritoBtnEliminar{
+    width: 30px;
+    height: 30px;
 }
-#carrito p{
-    padding: 0;
-    margin:0;
+#btnCarrito{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 80px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 5px 5px 10px black;
+    border-radius: 100%;
 }
-#carrito .col-img img{
-    width: 50%;
+#contadorProductos{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    font-size: 10px;
+    font-weight: bolder;
+    top: -5px;
+    right: 0px;
+    background-color: red;
+    color: white;
 }
 /*ICONOS REDES SOCIALES*/
 #iconWtsp{

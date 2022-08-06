@@ -13,7 +13,7 @@ class ItemCarrito{
 
 //VARIABLES
 const carrito=JSON.parse(localStorage.getItem("carrito"))|| [];
-const DOMCarrito=document.getElementById("items");
+const DOMCarrito=document.getElementById("modal-container-items");
 const productos=document.getElementById("containerCards");
 const stock= JSON.parse(localStorage.getItem("lstProductos")) || [];
 
@@ -79,64 +79,35 @@ renderizarCarrito();
 //FUNCIONES
 //DOM - Funcion que crea los items del carrito de acuerdo  al array carrito. 
 function renderizarCarrito(){
-    // Vaciamos todo el html
-    DOMCarrito.innerHTML = "";
-    carrito.forEach(info => {
-        //Estructura general
-        const miNodo=document.createElement("div");
-        miNodo.classList.add("w-100","row", "justify-content-lg-between","align-items-center","my-2","mx-auto","itemCarrito");
-        //Imagen
-        const miNodoImagenCont=document.createElement("div");
-        miNodoImagenCont.classList.add("d-none","d-lg-block","col-lg-4","col-img");
-        const miNodoImagen=document.createElement("img");
-        miNodoImagen.setAttribute("src",info.img);
-        miNodoImagenCont.append(miNodoImagen);
-       //Nombre
-        const miNodoNombre=document.createElement("p");
-        miNodoNombre.classList.add("col-2","col-lg-1","itemCarritoNombre");
-        miNodoNombre.innerText=info.nombre;
-       //Modelo
-       const miNodoModelo=document.createElement("p");
-       miNodoModelo.classList.add("d-none","d-lg-block","col-lg-1");
-       miNodoModelo.innerText=info.modelo;
-       //KM
-       const miNodoKM=document.createElement("p");
-       miNodoKM.classList.add("d-none","d-lg-block","col-lg-1");
-       miNodoKM.innerText=info.km;
-       //Precio
-       const miNodoPrecio=document.createElement("p");
-       miNodoPrecio.classList.add("col-3","col-lg-1");
-       miNodoPrecio.innerText="$"+info.precio;
-       // CANTIDAD
-       const cant=document.createElement("p");
-       cant.classList.add("col-3","col-lg-1");
-       cant.innerText=info.cantidad;
-       //PRECIO TOTAL
-       const miNodoPrecioTotal=document.createElement("p");
-       miNodoPrecioTotal.classList.add("col-2","col-lg-1");
-       miNodoPrecioTotal.innerText="$"+info.precioTotal;
+    DOMCarrito.innerHTML="";
+    let containerContador=document.getElementById("contadorProductos");
+    let contador=0;
+    carrito.forEach(info=>{
+        const containerItem=document.createElement("div");
+        containerItem.classList.add("row","justify-content-between","align-items-center","w-100","m-0","p-2","itemCarrito", "carritoFont")
+        containerItem.innerHTML=`
+        <img src=${info.img} class="d-none d-lg-block col-lg-2">
+        <p class="m-0 p-0 col-2 text-center fw-bold itemCarritoNombre">${info.nombre}</p>
+        <p class="m-0 p-0 col-2 text-center">$${info.precio}</p>
+        <p class="m-0 p-0 col-2 text-center">${info.cantidad}</p>
+        <p class="m-0 p-0 col-2 text-center">$${info.precioTotal}</p>
+        `
        //BOTON ELIMINAR
        const containerBtnEliminar=document.createElement("div");
-       containerBtnEliminar.classList.add("col-2","col-lg-1");
+       containerBtnEliminar.classList.add("m-0", "p-0","col-2","d-flex", "align-items-center", "justify-content-center");
        const btnEliminar=document.createElement("button");
-       btnEliminar.classList.add("btn","btn-danger","btnEliminarItem");
+       btnEliminar.classList.add("btn","btn-danger","itemCarritoBtnEliminar","d-flex", "align-items-center", "justify-content-center");
        btnEliminar.innerText="X";
        btnEliminar.addEventListener("click",respuestaBtnEliminarItem);
        containerBtnEliminar.appendChild(btnEliminar);
-       //INSERTAMOS LOS NODOS
-       miNodo.appendChild(miNodoImagenCont);
-       miNodo.appendChild(miNodoNombre);
-       miNodo.appendChild(miNodoModelo);
-       miNodo.appendChild(miNodoKM);
-       miNodo.appendChild(miNodoPrecio);
-       miNodo.appendChild(cant);
-       miNodo.appendChild(miNodoPrecioTotal);
-       miNodo.appendChild(containerBtnEliminar);
-       DOMCarrito.appendChild(miNodo);
-    });
+       containerItem.appendChild(containerBtnEliminar);
+       DOMCarrito.appendChild(containerItem);
+       contador++;
+    })
     localStorage.setItem("carrito",JSON.stringify(carrito));  
     let sumaTotal=document.getElementById("sumaCompra");
-    sumaTotal.innerText="TOTAL: $"+calcularTotal(carrito);
+    sumaTotal.innerText="TOTAL: $"+calcularTotal(carrito); 
+    containerContador.innerText=contador;
 }
 
 //Funcion de respuesta al evento "click" en cualquiera de los botones "agregar al carrito"
@@ -248,12 +219,24 @@ function calcularTotal(lstCarrito){
 //Funcion de respuesta al evento "click" en el boton confirmar compra. 
 function confirmarCompra(){
     if(carrito.length!=0){
-        vaciarCarrito();
-        Swal.fire(
+        if(sessionStorage.getItem("usuario")!=undefined){
+            vaciarCarrito();
+            Swal.fire(
             'Has confirmado la compra',
-            'Buena elección!',
+            'Te enviaremos un mail con mas info!',
             'success'
-          )
+            )}
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                showConfirmButton: false,
+                text: 'Debes iniciar sesion primero!',
+                timer: 1500
+            })     
+            setTimeout("redireccionar()", 2500);
+        }
+        
     }else{
         Swal.fire({
             icon: 'error',
@@ -261,9 +244,14 @@ function confirmarCompra(){
             showConfirmButton: false,
             text: 'Aun el carrito está vacio!',
             timer: 1500
-          })    
+        })     
     }
 }
+//Funcion que redirecciona a la pagina usuario.html en caso de que quiera confirmar la compra y que el user no haya iniciado sesion. 
+function redireccionar(){
+    window.location.href = "../pages/usuario.html";
+  }
+   
 //Funcion de respuesta al evento "click" a alguno de los botonces de ordenamiento o filtro. 
 function ordenarPorModelo(){
     let productosOrdenados= [...stock];
@@ -334,7 +322,7 @@ function filtrarPorUsados(){
 
 //EVENTOS
 //BOTONES ELIMINAR ITEM
-let botonesEliminarItem=document.querySelectorAll(".btnEliminarItem");
+let botonesEliminarItem=document.querySelectorAll(".itemCarritoBtnEliminar");
 for(let boton of botonesEliminarItem){
     boton.addEventListener("click",respuestaBtnEliminarItem);
 }

@@ -52,11 +52,43 @@
         <div class="d-flex justify-content-center align-items-center my-auto">
             <p class="my-auto me-2" id="msjBienvenida"></p>
             <a class="me-2" href="usuario.html"><img src="../image/user.png" alt=""></a>
-            <a class="me-2" href="#carrito"><img src="../image/carritp-compras.png" alt=""></a>
         </div>
     </header>
     <!--MAIN-->
     <main id="main">
+        <!--CARRITO-->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnCarrito"> <img
+                src="../image/carritp-compras.png" alt=""><span id="contadorProductos"></span></button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <h5 class="modal-title text-uppercase" id="modalLabel">Carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="row justify-content-between align-items-center w-100 p-2 m-0 carritoFont">
+                        <div class="d-none d-lg-block col-lg-2 text-center fw-bold m-0">Imagen</div>
+                        <div class="m-0 col-2 text-center fw-bold">Nombre</div>
+                        <div class="m-0 col-2 text-center fw-bold">Precio</div>
+                        <div class="m-0 col-2 text-center fw-bold">Cantidad</div>
+                        <div class="m-0 col-2 text-center fw-bold">Total</div>
+                        <div class="m-0 col-2 text-center fw-bold">Eliminar</div>
+                    </div>
+                    <!--ITEMS CARRITO (DOM)-->
+                    <div class="modal-body p-0" id="modal-container-items"> </div>
+                    <!--TOTAL SUMA CARRITO (DOM)-->
+                    <div class="text-center">
+                        <p id="sumaCompra" class="w-100 fs-5 fw-bold ">TOTAL: $0</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="btnVaciarCarrito">Vaciar</button>
+                        <button type="button" class="btn btn-success" id="btnConfirmarCompra">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--SECTION CARDS AUTOS-->
         <section class="container text-center pt-3 pb-3 ">
             <h3 class="pt-2 ">Encontra tu proximo <strong> Volkswagen</strong></h3>
@@ -94,40 +126,6 @@
             </div>
             <!--TARJETAS DE AUTOS (DOM)-->
             <div id="containerCards" class="d-flex justify-content-around align-items-center flex-wrap">
-            </div>
-        </section>
-        <!--SECTION CARRITO-->
-        <section class="container text-center pt-3 pb-3 px-0 ">
-            <h3 class="pt-2 "> <strong> CARRITO</strong></h3>
-            <div id="carrito" class="w-100">
-                <div id="carrito-title-col" class="row justify-content-lg-between align-items-center">
-                    <div class="d-none d-lg-block col-lg-4"> Imagen</div>
-                    <div class="col-2 col-lg-1"> Nombre</div>
-                    <div class="d-none d-lg-block col-lg-1"> Anio</div>
-                    <div class="d-none d-lg-block col-lg-1 "> KM</div>
-                    <div class="col-3 col-lg-1"> Unitario</div>
-                    <div class="col-3 col-lg-1"> Cantidad</div>
-                    <div class="col-2 col-lg-1"> Total</div>
-                    <div class="col-2 col-lg-1"> Eliminar</div>
-                </div>
-                <div id="items">
-                    <!--ITEMS CARRITO (DOM)-->
-                </div>
-                <div
-                    class="row w-100 justify-content-center justify-content-lg-between  align-items-center my-4 mx-auto">
-                    <div class="col-10 my-2 my-lg-0 col-lg-2 ">
-                        <button type="button" id="btnVaciarCarrito" class="btn btn-danger p-2">VACIAR
-                            CARRITO</button>
-                    </div>
-                    <div class="col-10 my-2 my-lg-0 col-lg-2">
-                        <button type="button" id="btnConfirmarCompra" class="btn btn-success p-2">CONFIRMAR
-                            COMPRA</button>
-                    </div>
-                    <div class="col-10 my-2 my-lg-0 col-lg-2">
-                        <!--TOTAL SUMA CARRITO (DOM)-->
-                        <p id="sumaCompra" class="w-100 fs-5 fw-bold ">TOTAL: $0</p>
-                    </div>
-                </div>
             </div>
         </section>
         <!--ICONOS REDES SOCIALES-->
