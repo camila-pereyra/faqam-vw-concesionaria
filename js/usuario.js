@@ -1,3 +1,4 @@
+//CLASE USUARIO
 class Usuario{
     constructor(nombre,apellido,email,contraseña){
         this.nombre=nombre;
@@ -7,9 +8,17 @@ class Usuario{
     }
 }
 
+//VARIABLES
+let btnInicarSesion=document.getElementById("btnIniciarSesion");
+let btnCrearCuenta=document.getElementById("btnCrearCuenta");
+let containerFormIniciarSesion=document.getElementById("containerformInicioSesion");
+let containerFormResgitro=document.getElementById("containerformRegistro");
+let formCrearUsuario=document.getElementById("formRegister");
+let formIniciarSesion=document.getElementById("formLogin");
 //Inicio el array vacio o bien con lo que hay en el Local Storage
 const listaUsuarios=JSON.parse(localStorage.getItem("lstUsuarios")) || [];
 
+//FUNCIONES
 //funcion que utiliza una API para generar usuarios aleatorios y agregarlos a la lista de usuarios
 const generarUsuariosAPI= async () => {
     try {
@@ -24,19 +33,11 @@ const generarUsuariosAPI= async () => {
       console.log("error: ", err);
     }
 } 
-
-//si la lista de usuarios esta vacia (es decir, es la primera vez que ingreso a la página) se ejecuta la funcion generarUsuariosAPI. 
-//Caso contrario, los carga del localStorage 
-if(listaUsuarios.length===0){
-    generarUsuariosAPI();
-}
-
-
-//REGISTRAR USUARIO
+//funcion que registra a un Usuario y valida que no tenga una cuenta con ese mail
 function registarUsuario(e){
     e.preventDefault();
     let correo=document.getElementById("emailRegister").value;
-    let nombre=document.getElementById("nombreResgister").value;
+    let nombre=document.getElementById("nombreRegister").value;
     let apellido=document.getElementById("apellidoRegister").value;
     let contraseña=document.getElementById("contraseñaRegister").value;
     if(buscarCorreo(correo, listaUsuarios)==-1){
@@ -60,9 +61,8 @@ function registarUsuario(e){
         })
     } 
 }
-
 function borrarCamposFormRegister(){
-    let inputNombre=document.getElementById("nombreResgister");
+    let inputNombre=document.getElementById("nombreRegister");
     let inputApellido=document.getElementById("apellidoRegister");
     let inputCorreo=document.getElementById("emailRegister");
     let inputContraseña=document.getElementById("contraseñaRegister");
@@ -71,7 +71,6 @@ function borrarCamposFormRegister(){
     inputCorreo.value="";
     inputContraseña.value="";
 }
-
 function buscarCorreo(correoUsuario, listaUsuarios){
     let i=0;
     let posEncontrado;
@@ -87,7 +86,7 @@ function borrarCamposFormLogin(){
     inputCorreo.value="";
     inputContraseña.value="";
 }
-//INICIAR SESION 
+//funcion que valida los datos ingresados por el usuario y permite(o no) iniciar sesion
 function iniciarSesion(e){
     e.preventDefault();
     let correo=document.getElementById("correo").value;
@@ -109,17 +108,34 @@ function iniciarSesion(e){
                     timer: 2000
                   })
                 sessionStorage.setItem("usuario",JSON.stringify(listaUsuarios[posCorreo]));
-                updateMsjBienvenida();
+                actualizarDOMUser();
                 borrarCamposFormLogin();
         }
     }
 }
+function aparecerFormInicioSesion(){
+    containerFormResgitro.classList.add("displayNone");
+    containerFormIniciarSesion.classList.remove("displayNone")
+
+}
+function aparecerFormCrearCuenta(){
+    containerFormIniciarSesion.classList.add("displayNone");
+    containerFormResgitro.classList.remove("displayNone")
+}
 
 //EVENTOS
-let formCrearUsuario=document.getElementById("formRegister");
+btnInicarSesion.addEventListener("click",aparecerFormInicioSesion);
+btnCrearCuenta.addEventListener("click",aparecerFormCrearCuenta);
 formCrearUsuario.addEventListener("submit",registarUsuario);
-let formIniciarSesion=document.getElementById("formLogin");
 formIniciarSesion.addEventListener("submit",iniciarSesion);
+
+//si la lista de usuarios esta vacia (es decir, es la primera vez que ingreso a la página) se ejecuta la funcion generarUsuariosAPI. 
+//Caso contrario, los carga del localStorage 
+if(listaUsuarios.length===0){
+    generarUsuariosAPI();
+}
+
+
 
 
 

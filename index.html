@@ -18,8 +18,9 @@
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--FONTS-->
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@200&display=swap" rel="stylesheet">
     <!--FAVICON-->
     <link rel="shortcut icon" href="image/FAQAMlogo-removebgpreview.png" type="image/x-icon">
 </head>
@@ -43,19 +44,27 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
                         <a class="nav-link" href="pages/catalogo.html">Catalogo</a>
-                        <a class="nav-link" href="pages/contacto.html">Contacto</a>
+                        <a class="nav-link" href="pages/usuario.html">Usuario</a>
                     </div>
                 </div>
             </div>
         </nav>
         <!--user-->
         <div class="d-flex justify-content-center align-items-center my-auto">
-            <p class="my-auto me-2" id="msjBienvenida"></p>
-            <a class="me-2" href="pages/usuario.html"><img src="image/user.png" alt=""></a>
+            <p id="msjBienvenida"></p>
+            <div class="dropdown">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownUser" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img src="image/user.png" alt="">
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownUser" id="dropdownMenuUser">
+                    <!--DOM-->
+                </ul>
+            </div>
         </div>
     </header>
     <!--MAIN-->
-    <main id="main">
+    <main id="mainIndex">
         <!--HERO-->
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -84,19 +93,20 @@
             </button>
         </div>
         <!--SECTION: MAS INFO-->
-        <section class="py-3">
-            <h2 class="text-center">En <strong>FAQAM</strong> hay un Volkswagen para vos</h2>
+        <section class="py-4 bg-light">
+            <h2 class="text-center text-uppercase mb-4">En <strong>FAQAM</strong> hay un Volkswagen para vos</h2>
             <div class="container py-2">
                 <div class="row justify-content-lg-center align-items-center ">
                     <div class="col-lg-10 mb-4 ">
                         <div class="divImgMasInfo">
                             <img class="divImg" src="image/autos/amarokv6.png" alt="">
                             <div class="divInfo">
-                                <p>Lorem ipsum dolor sit amet consectetur
-                                    adipisicing
-                                    elit.
-                                    Hic, enim porro iure, accusamus libero exercitationem blanditiis voluptas eos
-                                    voluptatibus aut aspernatur voluptates explicabo minus sit quod vero eligendi et at.
+                                <p class="mb-0">Llegó la nueva Amarok con 258 caballos de potencia para seguir creando
+                                    historia
+                                    dentro de la industria automotriz. Ya sea en el ripio, en asfalto, en arena, barro o
+                                    nieve, Amarok tiene para ofrecerte más potencia que nunca, con una estabilidad
+                                    dinámica que la distingue del resto y una tecnología lista para ser tu soporte ideal
+                                    en todas las condiciones.
                                 </p>
                             </div>
                         </div>
@@ -107,12 +117,9 @@
                         <div class="divImgMasInfo">
                             <img class="divImg" src="image/autos/taos2.jpg" alt="">
                             <div class="divInfo">
-                                <p>Lorem ipsum dolor sit amet consectetur
-                                    adipisicing
-                                    elit.
-                                    Hic, enim porro iure, accusamus libero exercitationem blanditiis voluptas eos
-                                    voluptatibus aut aspernatur voluptates explicabo minus sit quod vero eligendi et at.
-                                </p>
+                                <p class="mb-0">La tecnología Volkswagen Taos seminuevo nunca se sintió tan bien, ofrece
+                                    una amplia gama de tecnologías inteligentes para ofrecer un mejor confort al
+                                    manejar, cada año de esta marca ofrece un diseño único e innovador.
                             </div>
                         </div>
                     </div>
@@ -120,11 +127,9 @@
                         <div class="divImgMasInfo">
                             <img class="divImg" src="image/autos/virtus2.jpg" alt="">
                             <div class="divInfo">
-                                <p>Lorem ipsum dolor sit amet consectetur
-                                    adipisicing
-                                    elit.
-                                    Hic, enim porro iure, accusamus libero exercitationem blanditiis voluptas eos
-                                    voluptatibus aut aspernatur voluptates explicabo minus sit quod vero eligendi et at.
+                                <p class="mb-0">Encuentra la combinación perfecta de lujo, confort y estética a bordo. A
+                                    través de sus líneas laterales y frontales, faros bifocales halógenos y detalles
+                                    cromados, el Nuevo Virtus destaca por su diseño sofisticado y renovado.
                                 </p>
                             </div>
                         </div>
@@ -132,13 +137,13 @@
                 </div>
             </div>
         </section>
-        <!--DIV: CATALOGO-->
+        <!--BTN IR AL CATALOGO-->
         <div class="container-fluid text-center mb-5">
             <a id="btnCatalogo" href="pages/catalogo.html">Ir al catalogo</a>
         </div>
         <!--SECTION: OPINIONES-->
-        <section class="bg-success py-3">
-            <h3 class="text-center text-white ">Que opinan nuestros clientes</h3>
+        <section class="bg-success py-4">
+            <h3 class="text-center text-white text-uppercase">Que opinan nuestros clientes</h3>
             <div class="container py-2">
                 <!--  -->
                 <div class="row justify-content-sm-around justify-content-lg-around ">
@@ -148,8 +153,7 @@
                                 <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/11.jpg"
                                     alt="">
                                 <h4 class="card-tittle">Juan Perez</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-                                    neque nihil, quaerat nostrum perferendis sint!</p>
+                                <p class="card-text"> Excelente asesoramiento y atencion. Muy conforme.</p>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
@@ -164,8 +168,8 @@
                                 <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/72.jpg"
                                     alt="">
                                 <h4 class="card-tittle">Facundo Quiroga</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error,
-                                    ipsam?</p>
+                                <p class="card-text">Quede muy contento. La variedad de modelos y los precios que
+                                    manejan hacen que sea mas facil tener el auto de tus sueños.</p>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
@@ -180,8 +184,7 @@
                                 <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/31.jpg"
                                     alt="">
                                 <h4 class="card-tittle">Roberto Sanchez</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet
-                                    officiis ratione necessitatibus eos et sed architecto explicabo vero quod adipisci.
+                                <p class="card-text"> Al fin pude tener mi primer VW. Gracias, los recomiendo!
                                 </p>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
@@ -197,8 +200,8 @@
                                 <img class="rounded-circle " src="https://randomuser.me/api/portraits/men/28.jpg"
                                     alt="">
                                 <h4 class="card-tittle">Pablo Garcia</h4>
-                                <p class="card-text">Lorem ipsum dolor consectetur adipisicing elit. Voluptas
-                                    neque nihil, quaerat nostrum perferendis sint!</p>
+                                <p class="card-text"> Me brindaron asesoramiento personalizado y todo salio perfecto.
+                                    Unos genios!</p>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
                                 <i class="bi bi-star-fill mx-1"></i>
@@ -210,6 +213,39 @@
                 </div>
             </div>
         </section>
+        <!--CARRITO-->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnCarrito"> <img
+                src="../image/carritp-compras.png" alt=""><span id="contadorProductos"></span></button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <h5 class="modal-title text-uppercase" id="modalLabel">Carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="row justify-content-between align-items-center w-100 p-2 m-0 carritoFont">
+                        <div class="d-none d-lg-block col-lg-2 text-center fw-bold m-0">Imagen</div>
+                        <div class="m-0 col-2 text-center fw-bold">Nombre</div>
+                        <div class="m-0 col-2 text-center fw-bold">Precio</div>
+                        <div class="m-0 col-2 text-center fw-bold">Cantidad</div>
+                        <div class="m-0 col-2 text-center fw-bold">Total</div>
+                        <div class="m-0 col-2 text-center fw-bold">Eliminar</div>
+                    </div>
+                    <!--ITEMS CARRITO (DOM)-->
+                    <div class="modal-body p-0" id="modal-container-items"> </div>
+                    <!--TOTAL SUMA CARRITO (DOM)-->
+                    <div class="text-center">
+                        <p id="sumaCompra" class="w-100 fs-5 fw-bold ">TOTAL: $0</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="btnVaciarCarrito">Vaciar</button>
+                        <button type="button" class="btn btn-success" id="btnConfirmarCompra">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--ICONOS REDES SOCIALES-->
         <div id="iconWtsp">
             <a href=""><i class="fab fa-whatsapp"></i></a>
@@ -236,12 +272,15 @@
                 <strong> <ins>Navegación</ins> </strong>
                 <li><a href="index.html">Inicio</a> </li>
                 <li><a href="pages/catalogo.html">Catalogo</a> </li>
-                <li><a href="pages/contacto.html">Contacto</a> </li>
+                <li><a href="pages/usuario.html">Usuario</a> </li>
             </ul>
         </div>
     </footer>
+    <!--ALERTSWEET CDN-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--JS-->
-    <script src="js/index.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/headerUser.js"></script>
     <!--BS JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
